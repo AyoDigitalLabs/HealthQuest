@@ -21,7 +21,10 @@ var defaultPlayer = {
   totalCorrect: 0,
   totalAnswered: 0,
   scenariosPlayed: 0,
-  scenarioBest: {}
+  scenarioBest: {},
+  anatomySeen: [],
+  anatomyBest: {},
+  anatomyPlayed: 0
 };
 
 var player = JSON.parse(JSON.stringify(defaultPlayer));
@@ -53,6 +56,8 @@ function loadPlayer() {
     if (!Array.isArray(player.activeDays)) { player.activeDays = []; }
     if (!Array.isArray(player.completedLessons)) { player.completedLessons = []; }
     if (!player.scenarioBest || typeof player.scenarioBest !== 'object') { player.scenarioBest = {}; }
+    if (!Array.isArray(player.anatomySeen)) { player.anatomySeen = []; }
+    if (!player.anatomyBest || typeof player.anatomyBest !== 'object') { player.anatomyBest = {}; }
   } catch (e) {
     console.log('Could not load saved data:', e);
   }
@@ -186,6 +191,7 @@ function updateAllUI() {
   if (window.Academy) { Academy.render(); }
   if (window.Quiz) { Quiz.render(); }
   if (window.Simulator) { Simulator.render(); }
+  if (window.Anatomy) { Anatomy.render(); }
 }
 
 // ----- Screen switching -----

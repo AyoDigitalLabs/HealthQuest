@@ -381,3 +381,27 @@ main { padding: 16px 16px 100px; max-width: 600px; margin: 0 auto; }
   font-size: 13px; line-height: 1.5;
 }
 .update-card b { color: var(--glow); }
+/* ================= PHASE 6 ADDITIONS (Anatomy Challenge) ================= */
+
+.stats-row.two { grid-template-columns: 1fr 1fr; }
+
+.anat-svg { display: block; width: 100%; max-width: 330px; margin: 10px auto 4px; }
+.anat-outline { fill: rgba(47, 128, 237, 0.05); stroke: rgba(143, 163, 204, 0.4); stroke-width: 2; }
+
+.anat-part > * {
+  fill: rgba(47, 128, 237, 0.28);
+  stroke: var(--blue);
+  stroke-width: 2;
+  transition: fill 0.15s ease;
+}
+.anat-part .anat-deco { fill: none; stroke: rgba(143, 163, 204, 0.6); stroke-width: 1.5; pointer-events: none; }
+.anat-part.clickable { cursor: pointer; }
+.anat-part.clickable:active > * { fill: rgba(0, 194, 255, 0.5); }
+.anat-part.selected > * { fill: rgba(0, 194, 255, 0.55); stroke: var(--glow); }
+.anat-part.target > * { fill: rgba(0, 194, 255, 0.6); stroke: var(--glow); stroke-width: 3; }
+.anat-part.correct > * { fill: rgba(39, 174, 96, 0.55); stroke: #27AE60; stroke-width: 3; }
+.anat-part.wrong > * { fill: rgba(235, 87, 87, 0.55); stroke: #EB5757; stroke-width: 3; }
+.anat-part.target .anat-deco, .anat-part.correct .anat-deco, .anat-part.wrong .anat-deco, .anat-part.selected .anat-deco { fill: none; }
+
+.anat-note { text-align: center; margin: 4px 0 12px; }
+.anat-info { margin-top: 14px; }
