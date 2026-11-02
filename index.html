@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A1128">
+<title>HealthQuest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Logo shape, defined once and reused -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo-mark" viewBox="0 0 64 64">
+    <path d="M32 4 56 13v18c0 15-10 25-24 29C18 56 8 46 8 31V13z" fill="#111B3A" stroke="#00C2FF" stroke-width="3"/>
+    <path d="M28 18h8v10h10v8H36v10h-8V36H18v-8h10z" fill="#2F80ED"/>
+    <path d="M10 33h12l4-7 6 14 4-7h18" fill="none" stroke="#00C2FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>
+
+<!-- SPLASH SCREEN -->
+<div id="splash">
+  <svg class="splash-logo"><use href="#logo-mark"/></svg>
+  <h1 class="brand">Health<span class="glow">Quest</span></h1>
+  <p class="tagline">Learn Medicine. Challenge Yourself. Save Lives.</p>
+  <div class="loader"><div class="loader-bar"></div></div>
+</div>
+
+<!-- NAME POPUP -->
+<div id="nameModal" class="modal hidden">
+  <div class="modal-box">
+    <h2 id="modalTitle">Choose your player name</h2>
+    <p>This is the name shown on your dashboard and, later, on the leaderboard.</p>
+    <input id="nameInput" type="text" maxlength="20" placeholder="e.g. Amina" autocomplete="off">
+    <div class="modal-actions">
+      <button id="nameCancel" class="btn-outline hidden">Cancel</button>
+      <button id="nameSave" class="btn-primary">Save name</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESET CONFIRMATION POPUP -->
+<div id="resetModal" class="modal hidden">
+  <div class="modal-box">
+    <h2>Reset all progress?</h2>
+    <p>This will delete your name, XP, level, streak and completed lessons. It cannot be undone.</p>
+    <div class="modal-actions">
+      <button id="resetCancel" class="btn-outline">Cancel</button>
+      <button id="resetConfirm" class="btn-danger">Yes, reset</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app" class="hidden">
+
+  <header class="topbar">
+    <div class="topbar-row">
+      <div class="topbar-brand">
+        <svg class="mini-logo"><use href="#logo-mark"/></svg>
+        <span class="brand-small">Health<span class="glow">Quest</span></span>
+      </div>
+      <div class="chips">
+        <span class="chip" id="levelChip">Lv 1</span>
+        <span class="chip" id="streakChip">Streak: 0</span>
+      </div>
+    </div>
+    <div class="xp-wrap">
+      <div class="xp-bar"><div class="xp-fill" id="xpFill"></div></div>
+      <span class="xp-text" id="xpText">0 / 100 XP</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HOME / DASHBOARD -->
+    <section id="screen-home" class="screen active">
+
+      <div class="hero-card">
+        <h2 id="greetText">Welcome, Future Healthcare Hero</h2>
+        <p>Sharpen your medical knowledge through quizzes, simulations and daily challenges.</p>
+        <button class="btn-primary" data-msg="Daily Challenge arrives in Phase 7">Start Today's Challenge</button>
+        <p class="daily-status" id="dailyStatus"></p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box"><b id="statTotalXp">0</b><span>Total XP</span></div>
+        <div class="stat-box"><b id="statBestStreak">0</b><span>Best streak</span></div>
+        <div class="stat-box"><b id="statQuizzes">0</b><span>Quizzes</span></div>
+      </div>
+
+      <h3 class="section-heading">This week</h3>
+      <div class="week-card">
+        <div class="week-strip" id="weekStrip"></div>
+        <p class="week-note" id="weekNote"></p>
+      </div>
+
+      <h3 class="section-heading">Health tip of the day</h3>
+      <div class="tip-card">
+        <p id="tipText"></p>
+        <small>General health education. Not a substitute for advice from a qualified health professional.</small>
+      </div>
+
+      <h3 class="section-heading">Your training grounds</h3>
+      <div class="grid">
+        <button class="feature-card" data-go="academy">
+          <span class="badge">Phase 3</span>
+          <strong>Health Academy</strong>
+          <small>Study core healthcare topics</small>
+        </>
+        <button class="feature-card" data-go="quiz">
+          <span class="badge">Phase 4</span>
+          <strong>Medical Quiz</strong>
+          <small>Timed questions with explanations</small>
+        </>
+        <button class="feature-card" data-go="simulator" data-sim="clinic">
+          <span class="badge">Phase 5</span>
+          <strong>Patient Simulator</strong>
+          <small>Assess fictional patients</small>
+        </>
+        <button class="feature-card" data-go="simulator" data-sim="emergency">
+          <span class="badge">Phase 5</span>
+          <strong>Emergency Room</strong>
+          <small>Respond to simulated emergencies</small>
+        </>
+        <button class="feature-card" data-msg="Anatomy Challenge arrives in Phase 6">
+          <span class="badge">Phase 6</span>
+          <strong>Anatomy Challenge</strong>
+          <small>Identify body structures</small>
+        </button>
+        <button class="feature-card" data-msg="Leaderboard arrives in Phase 9">
+          <span class="badge">Phase 9</span>
+          <strong>Leaderboard</strong>
+          <small>Compare with other players</small>
+        </button>
+      </div>
+
+      <p class="disclaimer">HealthQuest is for education and simulation only. It does not replace professional clinical training or judgement.</p>
+    </section>
+
+    <!-- OTHER SCREENS -->
+    <section id="screen-academy" class="screen">
+  <div id="academyRoot"></div>
+    </section>
+    <section id="screen-quiz" class="screen">
+  <div id="quizRoot"></div>
+    </section>
+    <section id="screen-simulator" class="screen">
+  <div id="simRoot"></div>
+    </section>
+
+    <!-- PROFILE -->
+    <section id="screen-profile" class="screen">
+      <div class="profile-card">
+        <div class="avatar" id="profAvatar">?</div>
+        <h2 id="profName">Player</h2>
+        <p class="prof-level" id="profLevel">Level 1</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat-box"><b id="profXp">0</b><span>Total XP</span></div>
+        <div class="stat-box"><b id="profStreak">0</b><span>Streak</span></div>
+        <div class="stat-box"><b id="profBadges">0</b><span>Badges</span></div>
+      </div>
+
+      <button class="btn-outline wide" id="editNameBtn">Change player name</button>
+
+      <h3 class="section-heading">Testing tools</h3>
+      <p class="test-note">These two buttons are only for testing and will be removed later.</p>
+      <button class="btn-primary wide" id="testXpBtn">Test: add 40 XP</button>
+      <button class="btn-danger wide" id="resetBtn">Reset all progress</button>
+    </section>
+
+  </main>
+
+  <nav class="bottom-nav">
+    <button class="nav-btn active" data-screen="home">
+      <svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>
+      <span>Home</span>
+    </button>
+    <button class="nav-btn" data-screen="academy">
+      <svg viewBox="0 0 24 24"><path d="M12 4v16M12 4C10 3 6 3 3 4v15c3-1 7-1 9 1 2-2 6-2 9-1V4c-3-1-7-1-9 0z"/></svg>
+      <span>Academy</span>
+    </button>
+    <button class="nav-btn" data-screen="quiz">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7M12 17h.01"/></svg>
+      <span>Quiz</span>
+    </button>
+    <button class="nav-btn" data-screen="simulator">
+      <svg viewBox="0 0 24 24"><path d="M3 12h4l2-5 4 10 2-5h6"/></svg>
+      <span>Simulator</span>
+    </button>
+    <button class="nav-btn" data-screen="profile">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      <span>Profile</span>
+    </button>
+  </nav>
+
+  <div id="toast"></div>
+</div>
+<script src="academy-data.js"></script>
+<script src="academy.js"></script>
+<script src="quiz-data.js"></script>
+<script src="quiz.js"></script>
+<script src="sim-data.js"></script>
+<script src="simulator.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
