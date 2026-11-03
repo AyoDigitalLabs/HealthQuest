@@ -24,7 +24,11 @@ var defaultPlayer = {
   scenarioBest: {},
   anatomySeen: [],
   anatomyBest: {},
-  anatomyPlayed: 0
+  anatomyPlayed: 0,
+  badgesUnlocked: [],
+  dailyLast: '',
+  dailyCompleted: 0,
+  dailyScore: 0
 };
 
 var player = JSON.parse(JSON.stringify(defaultPlayer));
@@ -57,6 +61,7 @@ function loadPlayer() {
     if (!Array.isArray(player.completedLessons)) { player.completedLessons = []; }
     if (!player.scenarioBest || typeof player.scenarioBest !== 'object') { player.scenarioBest = {}; }
     if (!Array.isArray(player.anatomySeen)) { player.anatomySeen = []; }
+    if (!Array.isArray(player.badgesUnlocked)) { player.badgesUnlocked = []; }
     if (!player.anatomyBest || typeof player.anatomyBest !== 'object') { player.anatomyBest = {}; }
   } catch (e) {
     console.log('Could not load saved data:', e);
@@ -85,6 +90,14 @@ function daysAgo(n) {
 }
 
 // ----- XP and levels -----
+function levelTitle(level) {
+  if (level >= 15) { return 'HealthQuest Master'; }
+  if (level >= 10) { return 'Senior Practitioner'; }
+  if (level >= 7) { return 'Ward Specialist'; }
+  if (level >= 5) { return 'Clinical Trainee'; }
+  if (level >= 3) { return 'Junior Responder'; }
+  return 'Health Cadet';
+}
 function xpNeeded(level) {
   return 100 + (level - 1) * 50;
 }
@@ -101,6 +114,7 @@ function addXP(amount) {
     levelledUp = true;
   }
   savePlayer();
+  if (window.Achievements) { Achievements.check(); }
   updateAllUI();
   return levelledUp;
 }
@@ -178,7 +192,7 @@ function updateProfile() {
   var name = player.name ? player.name : 'Player';
   document.getElementById('profName').textContent = name;
   document.getElementById('profAvatar').textContent = name.charAt(0).toUpperCase();
-  document.getElementById('profLevel').textContent = 'Level ' + player.level;
+  document.getElementById('profLevel').textContent = 'Level ' + player.level + ' \u00B7 ' + levelTitle(player.level);
   document.getElementById('profXp').textContent = player.totalXp;
   document.getElementById('profStreak').textContent = player.streak;
   document.getElementById('profBadges').textContent = player.badges;
@@ -192,6 +206,8 @@ function updateAllUI() {
   if (window.Quiz) { Quiz.render(); }
   if (window.Simulator) { Simulator.render(); }
   if (window.Anatomy) { Anatomy.render(); }
+  if (window.Daily) { Daily.render(); }
+  if (window.Achievements) { Achievements.render(); }
 }
 
 // ----- Screen switching -----
