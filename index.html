@@ -82,7 +82,7 @@
       <div class="hero-card">
         <h2 id="greetText">Welcome, Future Healthcare Hero</h2>
         <p>Sharpen your medical knowledge through quizzes, simulations and daily challenges.</p>
-        <button class="btn-primary" data-msg="Daily Challenge arrives in Phase 7">Start Today's Challenge</button>
+        <button class="btn-primary" id="dailyBtn" data-go="daily">Start Today's Challenge</button>
         <p class="daily-status" id="dailyStatus"></p>
       </div>
 
@@ -151,6 +151,11 @@
     <section id="screen-simulator" class="screen">
   <div id="simRoot"></div>
     </section>
+<!-- DAILY CHALLENGE -->
+<section id="screen-daily" class="screen">
+  <div id="dailyRoot"></div>
+</section>
+
 <!-- ANATOMY CHALLENGE -->
 <section id="screen-anatomy" class="screen">
   <div id="anatomyRoot"></div>
@@ -171,7 +176,10 @@
         <div class="stat-box"><b id="profBadges">0</b><span>Badges</span></div>
       </div>
 
-      <button class="btn-outline wide" id="editNameBtn">Change player name</button>
+      <h3 class="section-heading">Achievements</h3>
+<div id="achRoot"></div>
+
+<button class="btn-outline wide" id="editNameBtn">Change player name</button>
 
       <h3 class="section-heading">Testing tools</h3>
       <p class="test-note">These two buttons are only for testing and will be removed later.</p>
@@ -214,6 +222,8 @@
 <script src="simulator.js"></script>
 <script src="anatomy-data.js"></script>
 <script src="anatomy.js"></script>
+<script src="achievements.js"></script>
+<script src="daily.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
