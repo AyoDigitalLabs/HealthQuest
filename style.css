@@ -428,3 +428,28 @@ main { padding: 16px 16px 100px; max-width: 600px; margin: 0 auto; }
   border-color: var(--glow); color: #fff;
   box-shadow: 0 0 12px rgba(0, 194, 255, 0.6);
 }
+/* ================= PHASE 8 ADDITIONS (Accounts) ================= */
+
+.modal { overflow-y: auto; }
+.modal .modal-box { margin: auto; }
+
+.auth-box h2 { margin-bottom: 12px; }
+.auth-tabs { margin-bottom: 14px; }
+.modal-box input.auth-field { display: block; margin-bottom: 10px; }
+.auth-error { color: #EB5757 !important; font-size: 12px; line-height: 1.5; margin: 4px 0 10px; }
+.auth-info { color: #27AE60 !important; font-size: 12px; line-height: 1.5; margin: 4px 0 10px; }
+.auth-or { text-align: center; margin: 12px 0 2px !important; }
+.auth-note { margin-top: 14px; margin-bottom: 0 !important; font-size: 11px !important; }
+.choice-line { color: var(--text) !important; font-size: 14px !important; font-weight: 600; margin-bottom: 8px !important; }
+
+.link-btn { display: block; color: var(--glow); font-size: 12px; text-decoration: underline; padding: 10px 0 2px; }
+.auth-later { margin: 6px auto 0; color: var(--muted); }
+
+.btn-sm { padding: 10px 16px !important; font-size: 13px !important; }
+.btn-primary:disabled, .btn-outline:disabled { opacity: 0.6; }
+
+.acct-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 14px 16px; margin: 14px 0; }
+.acct-banner { border-color: var(--glow); }
+.acct-card p { font-size: 13px; line-height: 1.6; }
+.acct-card .acct-status { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.acct-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }

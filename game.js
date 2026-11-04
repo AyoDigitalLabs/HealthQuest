@@ -74,6 +74,7 @@ function savePlayer() {
   } catch (e) {
     console.log('Could not save data:', e);
   }
+  if (window.Account) { Account.queueSync(); }
 }
 
 // ----- Date helpers -----
@@ -202,7 +203,8 @@ function updateAllUI() {
   updateTopBar();
   updateDashboard();
   updateProfile();
-  if (window.Academy) { Academy.render(); }
+  if (window.Achievements) { Achievements.render(); }
+  if (window.Account) { Account.render(); }
   if (window.Quiz) { Quiz.render(); }
   if (window.Simulator) { Simulator.render(); }
   if (window.Anatomy) { Anatomy.render(); }
